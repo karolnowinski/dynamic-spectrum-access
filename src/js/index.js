@@ -27,16 +27,16 @@ const themeSwitcher = document.querySelector('.theme-toggle img');
 const allDocument = document.querySelector('html');
 
 if (getCookie('theme-cookie') === 'dark') {
-  themeSwitcher.src = '../../dist/images/sun.svg';
+  themeSwitcher.src = '../../src/images/sun.svg';
   allDocument.classList.toggle('dark-theme');
 }
 
 themeSwitcher.addEventListener('mousedown', () => {
   if (allDocument.classList.contains('dark-theme')) {
-    themeSwitcher.src = '../../dist/images/moon.svg';
+    themeSwitcher.src = '../../src/images/moon.svg';
     setCookie('theme-cookie', 'light', 7);
   } else {
-    themeSwitcher.src = '../../dist/images/sun.svg';
+    themeSwitcher.src = '../../src/images/sun.svg';
     setCookie('theme-cookie', 'dark', 7);
   }
   allDocument.classList.toggle('dark-theme');
