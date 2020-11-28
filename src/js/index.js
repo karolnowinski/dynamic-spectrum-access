@@ -27,7 +27,7 @@ if (getCookie('theme-cookie') === 'dark') {
   allDocument.classList.toggle('dark-theme');
 }
 
-themeSwitcher.addEventListener('mousedown', () => {
+themeSwitcher.addEventListener('click', () => {
   if (allDocument.classList.contains('dark-theme')) {
     themeSwitcher.src = './src/images/moon.svg';
     setCookie('theme-cookie', 'light', 7);

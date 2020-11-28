@@ -5,7 +5,7 @@ const notification = document.querySelector('.card__header');
 const inputs = document.querySelectorAll('input');
 const submitButton = document.querySelector('button[type="submit"]');
 const btsTable = document.querySelector('.bts-list-body');
-// const usersRemoveButtons = document.querySelectorAll('.remove');
+const logoAnimation = document.querySelector('.radiation');
 
 function displayBtsList() {
   const requestOptions = {
@@ -105,6 +105,7 @@ function handleResponse(result) {
       notification.classList.add('bg-success', 'show');
   }
   displayBtsList();
+  logoAnimation.style.display = 'none';
   setTimeout(() => {
     inputs.forEach((input) => { input.disabled = false; });
     submitButton.toggleAttribute('disabled');
@@ -136,6 +137,8 @@ function handleData(e) {
   e.preventDefault();
   inputs.forEach((input) => { input.disabled = true; });
   submitButton.toggleAttribute('disabled');
+  logoAnimation.style.display = 'block';
+
   const latitude = this.querySelector('#latitude').value;
   const longitude = this.querySelector('#longitude').value;
   const power = this.querySelector('#power').value;
