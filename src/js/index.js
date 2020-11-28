@@ -20,20 +20,31 @@ function getCookie(name) {
 }
 
 const themeSwitcher = document.querySelector('.theme-toggle img');
-const allDocument = document.querySelector('html');
+const wholeDocument = document.querySelector('html');
 
 if (getCookie('theme-cookie') === 'dark') {
   themeSwitcher.src = './src/images/sun.svg';
-  allDocument.classList.toggle('dark-theme');
+  wholeDocument.classList.toggle('dark-theme');
 }
 
 themeSwitcher.addEventListener('click', () => {
-  if (allDocument.classList.contains('dark-theme')) {
+  if (wholeDocument.classList.contains('dark-theme')) {
     themeSwitcher.src = './src/images/moon.svg';
     setCookie('theme-cookie', 'light', 7);
   } else {
     themeSwitcher.src = './src/images/sun.svg';
     setCookie('theme-cookie', 'dark', 7);
   }
-  allDocument.classList.toggle('dark-theme');
+  wholeDocument.classList.toggle('dark-theme');
+});
+
+// secret code detection
+const pressed = [];
+const secretCode = 'code';
+window.addEventListener('keyup', (e) => {
+  pressed.push(e.key);
+  pressed.splice(-secretCode - 1, pressed.length - secretCode.length);
+  if (pressed.join('').includes(secretCode)) {
+    document.querySelector('.logo h1').innerHTML = 'XDDDDDD';
+  }
 });

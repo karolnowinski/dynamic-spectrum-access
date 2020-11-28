@@ -108,7 +108,7 @@ body {
   font-size: 20px;
 }
 
-.menu__item:hover:not {
+.menu__item:hover:not(:last-child) {
   border-bottom: 2px solid #007bff;
 }
 
