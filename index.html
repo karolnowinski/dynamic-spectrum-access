@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
   <title>dynamic-spectrum-access</title>
   <script defer src="src/js/index.js"></script>
   <script defer src="src/js/handleForm.js"></script>
@@ -16,40 +17,69 @@
 <body>
 
   <nav class="navigation">
-    <span class="logo">dynamic-spectrum-access</span>
+    <span class="logo"><img src="/src/images/icon.png" alt="dynamic-spectrum-access" height="30px"
+        width="auto">dynamic-spectrum-access</span>
     <ul class="menu">
-      <li class="menu__item">Strona Główna</li>
-      <li class="menu__item">O projekcie</li>
-      <li class="menu__item">Pomoc</li>
-      <li class="menu__item"><span class="theme-toggle"><img src="./src/images/moon.svg" alt="Przełącz motyw strony"></span></li>
+      <li class="menu__item"><a href="/">Strona Główna</a></li>
+      <li class="menu__item"><a href="/">O projekcie</a></li>
+      <li class="menu__item"><a href="/">Pomoc</a></li>
+      <li class="menu__item"><span class="theme-toggle"><img src="./src/images/moon.svg"
+            alt="Przełącz motyw strony"></span></li>
     </ul>
   </nav>
 
-  <div class="card">
-    <div class="card__header bg-success text-white">&nbsp;</div>
-    <div class="card__body">
-      <form class="form">
-        <div class="form__group">
-          <label for="latitude">Szerokość geograficzna</label>
-          <input type="number" class="form-control" id="latitude" required>
+  <div class="main-content">
+    <div class="card">
+      <div class="card__header bg-success text-white">&nbsp;</div>
+      <div class="card__body">
+        <div class="form-container">
+          <form class="form">
+            <div class="form__group">
+              <label for="latitude">Szerokość geograficzna</label>
+              <input type="number" class="form-control" id="latitude" required>
+            </div>
+            <div class="form__group">
+              <label for="longitude">Długość geograficzna</label>
+              <input type="number" class="form-control" id="longitude" required>
+            </div>
+            <div class="form__group">
+              <label for="power">Moc nadajnika [dBm]</label>
+              <input type="number" class="form-control" id="power" required>
+            </div>
+            <div class="form__group">
+              <label for="channel">Kanał</label>
+              <input type="number" class="form-control" id="channel" required>
+            </div>
+            <div class="form__group text-center">
+              <button type="submit" class="btn btn-primary form__submit ">Dodaj</button>
+            </div>
+          </form>
         </div>
-        <div class="form__group">
-          <label for="longitude">Długość geograficzna</label>
-          <input type="number" class="form-control" id="longitude" required>
-        </div>
-        <div class="form__group">
-          <label for="power">Moc nadajnika [dBm]</label>
-          <input type="number" class="form-control" id="power" required>
-        </div>
-        <div class="form__group">
-          <label for="channel">Kanał</label>
-          <input type="number" class="form-control" id="channel" required>
-        </div>
-        <div class="form__group text-center">
-          <button type="submit" class="btn btn-primary form__submit ">Dodaj</button>
-        </div>
-      </form>
+      </div>
     </div>
+    <div class="card bts-list">
+      <div class="card__body">
+        <table class="table text-right">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Szerokość geograficzna</th>
+              <th scope="col">Długość geograficzna</th>
+              <th scope="col">Moc nadajnika [dBm]</th>
+              <th scope="col">Kanał</th>
+              <th scope="col">Rezultat obliczeń</th>
+              <th scope="col" class="text-center">Edytuj</th>
+            </tr>
+          </thead>
+          <tbody class='bts-list-body'>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <footer>
+      <div class="footer text-muted">Zrealizowano w ramach projektu z przedmiotu Radiowe systemy i sieci programowalne.
+      </div>
+    </footer>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

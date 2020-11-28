@@ -19,15 +19,11 @@ function getCookie(name) {
   return null;
 }
 
-// function eraseCookie(name) {
-//   document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
-// }
-
 const themeSwitcher = document.querySelector('.theme-toggle img');
 const allDocument = document.querySelector('html');
 
 if (getCookie('theme-cookie') === 'dark') {
-  themeSwitcher.src = '../src/images/sun.svg';
+  themeSwitcher.src = './src/images/sun.svg';
   allDocument.classList.toggle('dark-theme');
 }
 
