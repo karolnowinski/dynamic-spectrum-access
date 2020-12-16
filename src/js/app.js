@@ -7,23 +7,38 @@ const btsTable = document.querySelector('.bts-list-body');
 const logoAnimation = document.querySelector('.logo__radiation');
 const ctx = document.getElementById('myChart').getContext('2d');
 
-function drawChart(context) {
-  const chart = new Chart(ctx, {
+function drawChart(context, data) {
+  // eslint-disable-next-line no-undef
+  return new Chart(context, {
     type: 'bubble',
 
     // The data for our dataset
     data: {
-      label: 'label',
       datasets: [{
-        label: 'Użytkownicy systemu',
+        label: 'Użytkownik systemu',
         backgroundColor: '#007bff',
         borderColor: '#007bff',
-        data: [{ x: 20, y: 40, r: 10 }, { x: 40, y: 50, r: 5 }],
+        data,
       }],
     },
 
     // Configuration options go here
-    options: {},
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            max: 200,
+          },
+        }],
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
+            max: 200,
+          },
+        }],
+      },
+    },
   });
 }
 
@@ -55,10 +70,12 @@ function displayBtsList() {
           </tr>
         </tbody>
         `;
+        drawChart(ctx, []);
       } else {
         const btsList = JSON.parse(result);
         btsTable.innerHTML = '';
         let htmlElement = '';
+        const chartData = [];
         btsList.forEach((el) => {
           htmlElement += `
           <tbody class="bts-list-body">
@@ -72,9 +89,10 @@ function displayBtsList() {
             <td class="text-danger align-middle text-center"><span class="remove" data-index=${el.user_id}  title="Usuń użytkownika z listy">╳</span></td>
           </tr>
         </tbody>`;
+          chartData.push({ x: el.user_coords_x, y: el.user_coords_y, r: 20 });
         });
         btsTable.innerHTML = htmlElement;
-        drawChart(ctx);
+        drawChart(ctx, chartData);
       }
     });
 }
@@ -86,7 +104,6 @@ function removeUser(e) {
     .then((result) => {
       if (result === '1') {
         displayNotification('success', 'Usunięto użytkownika.');
-        // mapLayer.clearLayers();
         displayBtsList();
       } else {
         displayNotification('danger', 'Błąd podczas usuwania użytkownika!');
@@ -144,6 +161,21 @@ function handleData(e) {
   form.reset();
 }
 
+function displaySystemParams() {
+  const paramsList = this.querySelector('#params ul');
+  fetch('http://dominik.sucharski.student.put.poznan.pl/?action=getSystemParams', { method: 'GET' })
+    .then((response) => response.text())
+    .then((result) => {
+      const params = JSON.parse(result);
+      params.forEach((element) => {
+        const param = document.createElement('li');
+        param.innerHTML = `${element.name}:&nbsp;<strong>${element.value}</strong>`;
+        paramsList.appendChild(param);
+      });
+    });
+}
+
 form.addEventListener('submit', handleData);
 document.addEventListener('DOMContentLoaded', displayBtsList);
+document.addEventListener('DOMContentLoaded', displaySystemParams);
 btsTable.addEventListener('click', removeUser);

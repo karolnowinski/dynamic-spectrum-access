@@ -41,7 +41,7 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
-    <link href="src/styles/index.css" rel="stylesheet" />
+    <link href="dist/styles/index.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -92,7 +92,7 @@
                   />
                 </div>
                 <div class="form__group">
-                  <label for="latitude">Szerokość geograficzna</label>
+                  <label for="latitude">Współrzędna X</label>
                   <input
                     type="number"
                     step="0.01"
@@ -102,7 +102,7 @@
                   />
                 </div>
                 <div class="form__group">
-                  <label for="longitude">Długość geograficzna</label>
+                  <label for="longitude">Współrzędna Y</label>
                   <input
                     type="number"
                     step="0.01"
@@ -157,8 +157,8 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nazwa</th>
-                    <th scope="col">Szerokość geograficzna</th>
-                    <th scope="col">Długość geograficzna</th>
+                    <th scope="col">Współrzędna X</th>
+                    <th scope="col">Współrzędna Y</th>
                     <th scope="col">Moc nadajnika [dBm]</th>
                     <th scope="col">Kanał</th>
                     <!-- <th scope="col">Rezultat obliczeń</th> -->
@@ -172,14 +172,13 @@
         </div>
       </div>
     </div>
-    <footer>
-      <div class="card">
-        <div id="params">
-          Parametry systemu:
-          <ul>
-          </ul>
-        </div>
+    <div class="sys-params">
+      <div id="params">
+        <strong>Parametry systemu:</strong>
+        <ul></ul>
       </div>
+    </div>
+    <footer>
       <div class="footer text-muted">
         Zrealizowano w ramach projektu z przedmiotu Radiowe Systemy i Sieci
         Programowalne.
@@ -196,13 +195,6 @@
       integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-      crossorigin=""
-    ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="src/js/map.js"></script>
-    <script src="src/js/chart.js"></script>
   </body>
 </html>
