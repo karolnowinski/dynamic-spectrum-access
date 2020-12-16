@@ -38,13 +38,20 @@ themeSwitcher.addEventListener('click', () => {
   wholeDocument.classList.toggle('dark-theme');
 });
 
-// secret code detection
-const pressed = [];
-const secretCode = 'code';
-window.addEventListener('keyup', (e) => {
-  pressed.push(e.key);
-  pressed.splice(-secretCode - 1, pressed.length - secretCode.length);
-  if (pressed.join('').includes(secretCode)) {
-    document.querySelector('.logo h1').innerHTML = 'XDDDDDD';
-  }
-});
+function getSystemParams() {
+  const paramsList = this.querySelector('#params ul');
+  fetch('http://dominik.sucharski.student.put.poznan.pl/?action=getSystemParams', { method: 'GET' })
+    .then((response) => response.text())
+    .then((result) => {
+      const params = JSON.parse(result);
+      params.forEach((element) => {
+        const param = document.createElement('li');
+        param.textContent = `${element.name}: ${element.value}`;
+        paramsList.appendChild(param);
+        // console.dir(element.name);
+      });
+    })
+    .catch((error) => console.log('error', error));
+}
+
+document.addEventListener('DOMContentLoaded', getSystemParams);

@@ -1,48 +1,52 @@
+@import './components/form';
+@import './components/animations';
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-@keyframes appear {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-36px);
-  }
-}
-
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: #eeeeee;
   transition: color 300ms, background-color 300ms;
   overflow-x: hidden;
 }
 
-.main-content {
+.main-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  margin-top: 160px;
   width: 100%;
-  margin-top: 180px;
+  height: 100%;
+}
+
+.elements-container {
+  display: flex;
+}
+
+.left-side,
+.right-side {
+  display: flex;
+  flex-direction: column;
 }
 
 .dark-theme {
   filter: invert(1) hue-rotate(180deg);
 }
 
-// .dark-theme img{
-//   filter: invert(1) hue-rotate(180deg);
-// }
+.dark-theme #map {
+  filter: invert(1) hue-rotate(180deg);
+}
 
 .navigation {
+  height: 120px;
   position: fixed;
   top: 0;
   z-index: 1;
@@ -51,11 +55,11 @@ body {
   justify-content: space-between;
   width: 100%;
   padding: 10px 50px;
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
-  background-color: #fff; 
-  
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+
   a {
-    color:inherit;
+    color: inherit;
     text-decoration: none;
   }
 }
@@ -66,7 +70,7 @@ body {
   justify-content: center;
   font-size: 20px;
   font-weight: 600;
-  
+
   &__image {
     position: relative;
     min-width: 60px;
@@ -81,26 +85,26 @@ body {
     }
   }
 
-  h1 {
+  &__radiation {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    border: 1px solid #000;
+    border-radius: 50%;
+    animation: radiating 1.5s ease-out infinite;
+  }
+
+  &__text {
     font-size: 24px;
     margin-left: 20px;
   }
 }
 
-.radiation {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  left: 25%;
-  top: 25%;
-  border: 1px solid #000;
-  border-radius: 50%;
-  animation: radiating 1.5s ease-out infinite;
-}
-
 .menu {
   display: flex;
-  align-items: center; 
+  align-items: center;
   font-size: 16px;
   list-style: none;
   margin: 0;
@@ -120,25 +124,21 @@ body {
   cursor: pointer;
 
   & img {
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: 20px;
+    height: auto;
+    margin: 0 10px;
   }
 
-  & img:hover{
+  & img:hover {
     transform: scale(1.2);
   }
 }
 
-.theme-toggle > img {
-  width: 20px;
-  height: auto;
-  margin: 0 10px;
-}
-
 .card {
   background-color: #fafafa;
+  transition: transform 0.8s;
   position: relative;
-  transition: transform .8s;
-  width: 100%;
 
   &__header {
     position: absolute;
@@ -149,9 +149,15 @@ body {
     text-align: center;
     padding: 6px 0;
     display: inline-block;
-    transition: transform .5s ease-in-out;
+    transition: transform 0.5s ease-in-out;
     will-change: transform;
     z-index: -1;
+
+    &--show {
+      animation: appear;
+      animation-duration: 0.8s;
+      animation-fill-mode: both;
+    }
   }
 
   &__body {
@@ -159,34 +165,12 @@ body {
   }
 }
 
-.show {
-  animation: appear;
-  animation-duration: .8s;
-  animation-fill-mode: both;
-}
-
-.form-container {
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.form {
-  display: flex;
-  align-items: flex-end; 
-  justify-content: space-between;
-
-  &__group {
-    padding-top: 10px;
-  }
-
-  &__submit {
-    margin-top: 10px;
-    width: 120px;
-  }
-} 
-
 .bts-list {
+  flex: 1;
+}
+
+.bts-list,
+.chart {
   .card__body {
     padding: 0;
   }
@@ -197,13 +181,12 @@ body {
   transition: 0.2s;
 
   tr:hover {
-    background-color: rgba(0, 0, 0, .02);
+    background-color: rgba(0, 0, 0, 0.02);
   }
 
   .remove:hover {
     cursor: pointer;
   }
-
 }
 
 .thead-light th {
@@ -211,47 +194,47 @@ body {
 }
 
 .footer {
-  margin-top: 10px;
+  margin: 10px 0;
   font-size: 12px;
   font-style: italic;
-  display: none;
+  text-align: center;
+  // display: none;
 }
 
-@media (max-width: 747px) {
+@media (max-width: 1200px) {
   .form {
-    align-items: center; 
+    align-items: center;
     flex-direction: column;
 
     &__group {
       width: 100%;
     }
   }
-  .navigation{
-    span, li {
+  .navigation {
+    span,
+    li {
       font-size: 14px;
     }
   }
-}
 
-// The animation - Safari and Chrome
-@-webkit-keyframes radiating {
-  from {
-    transform: scale(1);
-    opacity: .4;
+  .logo {
+    &__text {
+      font-size: 14px;
+    }
   }
-  to {
-    transform: scale(2.2);
-    opacity: 0;
+  .elements-container {
+    flex-direction: column;
   }
 }
 
-@keyframes radiating {
-  from {
-    transform: scale(1);
-    opacity: .4;
-  }
-  to {
-    transform: scale(2.2);
-    opacity: 0;
-  }
+#params {
+  text-align: center;
+  margin-top: 15px;
 }
+
+#params ul li {
+  list-style: none;
+  white-space: nowrap;
+  display: inline-flex;
+  margin: 0 40px;
+} 

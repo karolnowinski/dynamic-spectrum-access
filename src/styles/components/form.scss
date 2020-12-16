@@ -1,0 +1,28 @@
+.form {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  
+    &__group {
+      padding: 10px 2px 0px 2px;
+      font-size: 14px;
+      text-align: center;
+    }
+  
+    &__submit {
+      margin-top: 10px;
+      width: 120px;
+    }
+  
+    &__name {
+      width: 50%;
+    }
+  }
+  
+  #channel {
+    min-width: 65px;
+  }
+  
