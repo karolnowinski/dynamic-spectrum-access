@@ -55,8 +55,8 @@ function drawChart(context, data) {
         enabled: true,
         mode: 'point',
         callbacks: {
-          label(tooltipItem, dataset) {
-            return ` X: ${tooltipItem.xLabel}km | Y: ${tooltipItem.yLabel}km | Moc: ${dataset.datasets[0].data[tooltipItem.index].r}`;
+          label(tooltipItem) {
+            return ` X: ${tooltipItem.xLabel}km | Y: ${tooltipItem.yLabel}km}`;
           },
         },
       },
@@ -115,7 +115,7 @@ function displayBtsList() {
             <td class="text-danger align-middle text-center"><span class="remove" data-index=${el.user_id}  title="Usuń użytkownika z listy">╳</span></td>
           </tr>
         </tbody>`;
-          chartData.push({ x: el.user_coords_x, y: el.user_coords_y, r: el.user_ptx * 1 });
+          chartData.push({ x: el.user_coords_x, y: el.user_coords_y, r: 10 });
         });
         btsTable.innerHTML = htmlElement;
         drawChart(ctx, chartData);
